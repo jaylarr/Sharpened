@@ -15,5 +15,13 @@ describe("Layout", () => {
       screen.getByRole("heading", { level: 1, name: "Sharpened page content" })
     );
     expect(screen.getByRole("contentinfo")).toBeInTheDocument();
+    expect(screen.getAllByRole("link", { name: "Solution" })[0]).toHaveAttribute(
+      "href",
+      "#solutions"
+    );
+    expect(screen.getAllByRole("link", { name: "System" })[0]).toHaveAttribute(
+      "href",
+      "#systems"
+    );
   });
 });

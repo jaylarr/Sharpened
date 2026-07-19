@@ -95,9 +95,9 @@ const processSteps = [
 ];
 
 const trustItems = [
-  "Firsthand SSDI intake and filing workflow experience",
+  "Expertise in case intake and filing workflows.",
   "Workflow-first recommendations before tool decisions",
-  "No forced replacement of current systems",
+  "Designed to upgrade your existing systems, not disrupt your process.",
   "Privacy-safe public inquiry process",
   "Documentation and handoff built into implementation"
 ];
@@ -169,14 +169,14 @@ export function HomePage() {
         <div className="relative z-10 mx-auto grid w-full max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:px-8">
           <div className="flex flex-col justify-center text-white">
             <p className="mb-4 text-xs sm:text-sm font-extrabold uppercase tracking-[0.15em] text-[#FFC107]">
-              SSDI workflow automation consultancy
+              Law firm automation systems
             </p>
             <h1 className="font-display max-w-4xl text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
-              Workflow automation for Social Security Disability law firms
+              Workflow automation for law firms
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/80 sm:text-xl">
-              Sharpened helps SSDI teams reduce repetitive intake, filing, follow-up,
-              and handoff work through practical workflow assessment and automation.
+              We help law firms reduce repetitive tasks, filing, follow-up, and handoff
+              work through practical workflow assessment and automation.
             </p>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <Button
@@ -225,13 +225,13 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* Problems Section */}
-      <section id="problems" className="bg-white py-20 sm:py-24">
+      {/* Solutions Section */}
+      <section id="solutions" className="bg-white py-20 sm:py-24">
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader
-            description="SSDI firms often lose time in small repeated moments that add up across intake, filing, case management, and client communication."
-            eyebrow="Problem"
-            title="Workflow bottlenecks slow down good teams"
+            description="We build intelligent automations that eliminate manual tasks, reduce delays, and keep your firm's operations running smoothly from intake to case resolution."
+            eyebrow="Solutions"
+            title="Every minute your team spends on repetitive work is time taken away from your clients."
           />
           <div className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
             {problems.map(({ description, icon: Icon, title }) => (
@@ -341,13 +341,13 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* Process Section */}
-      <section id="process" className="py-20 sm:py-24">
+      {/* Systems Section */}
+      <section id="systems" className="py-20 sm:py-24">
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader
-            description="The assessment-led process gives cautious law firm buyers a clear first step before any implementation commitment."
-            eyebrow="Process"
-            title="How the assessment works"
+            description="Whether it's intake, document collection, case management, or client communication, we create automations that save time and keep your practice running smoothly."
+            eyebrow="Systems"
+            title="Better systems create better client experiences."
           />
           <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-5">
             {processSteps.map((step, index) => (
@@ -383,15 +383,13 @@ export function HomePage() {
 
         <div className="relative z-10 mx-auto grid w-full max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
           <div>
-            <p className="mb-3 text-xs font-extrabold uppercase tracking-[0.15em] text-white/70">
-              Trust
-            </p>
             <h2 className="font-display text-3xl font-extrabold tracking-tight sm:text-4xl">
-              Built for trust before implementation
+              Automation should feel like an upgrade—not a disruption.
             </h2>
             <p className="mt-5 text-base leading-relaxed text-white/80 sm:text-lg">
-              Sharpened keeps the first conversation focused on workflow context,
-              not sensitive claimant or client information.
+              Every engagement starts with understanding how your firm works today. We
+              recommend practical improvements that fit your existing workflows—not
+              unnecessary software or complicated system changes.
             </p>
             <div className="mt-8">
               <Button href="/contact" icon={<ArrowRight aria-hidden="true" size={18} />} variant="inverse">

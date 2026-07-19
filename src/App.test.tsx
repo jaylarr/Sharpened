@@ -10,7 +10,7 @@ describe("App", () => {
     expect(
       screen.getByRole("heading", {
         level: 1,
-        name: "Workflow automation for Social Security Disability law firms"
+        name: "Workflow automation for law firms"
       })
     ).toBeInTheDocument();
     expect(screen.getByRole("contentinfo")).toBeInTheDocument();

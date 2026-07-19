@@ -11,9 +11,9 @@ export function Layout({ children }: LayoutProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { name: "Problems", href: "#problems" },
+    { name: "Solution", href: "#solutions" },
     { name: "Services", href: "#services" },
-    { name: "Process", href: "#process" },
+    { name: "System", href: "#systems" },
     { name: "FAQ", href: "#faqs" },
   ];
 
@@ -126,7 +126,7 @@ export function Layout({ children }: LayoutProps) {
                 </span>
               </div>
               <p className="mt-4 max-w-md text-[15px] leading-7 text-white/70">
-                Sharpened helps Social Security Disability law firms reduce repetitive intake, filing, client follow-ups, and documentation work through practical workflow assessment and automation.
+                Sharpened helps law firms reduce repetitive tasks, filing, follow-up, and handoff work through practical workflow assessment and automation.
               </p>
             </div>
             <div>

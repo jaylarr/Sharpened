@@ -9,7 +9,7 @@ describe("HomePage", () => {
     expect(
       screen.getByRole("heading", {
         level: 1,
-        name: /workflow automation for social security disability law firms/i
+        name: /workflow automation for law firms/i
       })
     ).toBeInTheDocument();
 
@@ -18,7 +18,7 @@ describe("HomePage", () => {
     ).toHaveAttribute("href", "/workflow-assessment");
 
     expect(
-      screen.getByRole("heading", { level: 2, name: /workflow bottlenecks/i })
+      screen.getByRole("heading", { level: 2, name: /every minute your team spends/i })
     ).toBeInTheDocument();
     expect(
       screen.getByRole("heading", { level: 2, name: /diagnose before automating/i })
@@ -27,10 +27,10 @@ describe("HomePage", () => {
       screen.getByRole("heading", { level: 2, name: /workflow areas/i })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("heading", { level: 2, name: /how the assessment works/i })
+      screen.getByRole("heading", { level: 2, name: /better systems create/i })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("heading", { level: 2, name: /built for trust/i })
+      screen.getByRole("heading", { level: 2, name: /automation should feel like an upgrade/i })
     ).toBeInTheDocument();
     expect(
       screen.getByRole("heading", { level: 2, name: /common questions/i })
