@@ -17,11 +17,15 @@ describe("Layout", () => {
     expect(screen.getByRole("contentinfo")).toBeInTheDocument();
     expect(screen.getAllByRole("link", { name: "Solution" })[0]).toHaveAttribute(
       "href",
-      "#solutions"
+      "/#solutions"
     );
     expect(screen.getAllByRole("link", { name: "System" })[0]).toHaveAttribute(
       "href",
-      "#systems"
+      "/#systems"
+    );
+    expect(screen.getAllByRole("link", { name: "Blog" })[0]).toHaveAttribute(
+      "href",
+      "/blog"
     );
   });
 });

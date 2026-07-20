@@ -12,6 +12,7 @@ import {
   Shield,
   Users
 } from "lucide-react";
+import { PageMeta } from "../components/blog/PageMeta";
 import { Button } from "../components/ui/Button";
 
 const problems = [
@@ -154,6 +155,11 @@ function SectionHeader({ eyebrow, title, description, theme = "light" }: Section
 export function HomePage() {
   return (
     <>
+      <PageMeta
+        description="Sharpened helps law firms reduce repetitive intake, filing, follow-up, and handoff work through practical workflow assessment and automation."
+        path="/"
+        title="Workflow Automation for Law Firms"
+      />
       {/* Hero Section */}
       <section className="relative w-full overflow-hidden bg-[#0D1B3D] py-20 sm:py-28 lg:py-32">
         {/* Background Image with Dark Overlay */}

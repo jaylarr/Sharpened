@@ -1,0 +1,63 @@
+import { useEffect } from "react";
+
+type PageMetaProps = {
+  title: string;
+  description: string;
+  path: string;
+  type?: "website" | "article";
+  image?: string;
+  author?: string;
+};
+
+const siteUrl = "https://sharp-enedautomation.site";
+
+function setMeta(selector: string, attribute: "name" | "property", value: string, content: string) {
+  let element = document.head.querySelector<HTMLMetaElement>(selector);
+
+  if (!element) {
+    element = document.createElement("meta");
+    element.setAttribute(attribute, value);
+    document.head.appendChild(element);
+  }
+
+  element.content = content;
+}
+
+export function PageMeta({
+  author,
+  description,
+  image,
+  path,
+  title,
+  type = "website",
+}: PageMetaProps) {
+  useEffect(() => {
+    const fullTitle = `${title} | Sharpened`;
+    const canonicalUrl = `${siteUrl}${path}`;
+    const imageUrl = image ? `${siteUrl}${image}` : `${siteUrl}/images/hero-bg.png`;
+
+    document.title = fullTitle;
+    setMeta('meta[name="description"]', "name", "description", description);
+    setMeta('meta[property="og:title"]', "property", "og:title", fullTitle);
+    setMeta('meta[property="og:description"]', "property", "og:description", description);
+    setMeta('meta[property="og:type"]', "property", "og:type", type);
+    setMeta('meta[property="og:url"]', "property", "og:url", canonicalUrl);
+    setMeta('meta[property="og:image"]', "property", "og:image", imageUrl);
+
+    if (author) {
+      setMeta('meta[name="author"]', "name", "author", author);
+    } else {
+      document.head.querySelector('meta[name="author"]')?.remove();
+    }
+
+    let canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement("link");
+      canonical.rel = "canonical";
+      document.head.appendChild(canonical);
+    }
+    canonical.href = canonicalUrl;
+  }, [author, description, image, path, title, type]);
+
+  return null;
+}

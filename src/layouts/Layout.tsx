@@ -11,10 +11,11 @@ export function Layout({ children }: LayoutProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { name: "Solution", href: "#solutions" },
-    { name: "Services", href: "#services" },
-    { name: "System", href: "#systems" },
-    { name: "FAQ", href: "#faqs" },
+    { name: "Solution", href: "/#solutions" },
+    { name: "Services", href: "/#services" },
+    { name: "System", href: "/#systems" },
+    { name: "FAQ", href: "/#faqs" },
+    { name: "Blog", href: "/blog" },
   ];
 
   return (
