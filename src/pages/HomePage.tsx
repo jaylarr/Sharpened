@@ -88,11 +88,26 @@ const services = [
 ];
 
 const processSteps = [
-  "Discovery call",
-  "Workflow review",
-  "Bottleneck mapping",
-  "Recommendation roadmap",
-  "Optional implementation"
+  {
+    title: "Discovery call",
+    description: "Initial alignment call to understand operations."
+  },
+  {
+    title: "Workflow review",
+    description: "Deep dive analysis into actual task sequences."
+  },
+  {
+    title: "Bottleneck mapping",
+    description: "Identifying key speed bumps and delay zones."
+  },
+  {
+    title: "Recommendation roadmap",
+    description: "Actionable recommendations for tech or process changes."
+  },
+  {
+    title: "Optional implementation",
+    description: "Collaborative configuration and handoff systems."
+  }
 ];
 
 const trustItems = [
@@ -131,21 +146,32 @@ type SectionHeaderProps = {
   title: string;
   description: string;
   theme?: "light" | "dark";
+  align?: "left" | "center";
 };
 
-function SectionHeader({ eyebrow, title, description, theme = "light" }: SectionHeaderProps) {
+function SectionHeader({
+  eyebrow,
+  title,
+  description,
+  theme = "light",
+  align = "left"
+}: SectionHeaderProps) {
   const isDark = theme === "dark";
+  const centered = align === "center";
+
   return (
-    <div className="mx-auto mb-12 max-w-3xl text-center">
-      {eyebrow ? (
-        <p className={`mb-3 text-xs font-extrabold uppercase tracking-[0.15em] ${isDark ? "text-[#FFC107]" : "text-[#1D4ED8]"}`}>
-          {eyebrow}
-        </p>
-      ) : null}
-      <h2 className={`font-display text-3xl font-extrabold tracking-tight sm:text-4xl ${isDark ? "text-white" : "text-[#0D1B3D]"}`}>
-        {title}
-      </h2>
-      <p className={`mt-4 text-base leading-relaxed sm:text-lg ${isDark ? "text-white/80" : "text-[#52565E]"}`}>
+    <div className={`mb-12 ${centered ? "mx-auto max-w-3xl text-center" : "max-w-4xl lg:grid lg:max-w-none lg:grid-cols-[0.9fr_1.1fr] lg:items-end lg:gap-16"}`}>
+      <div>
+        {eyebrow ? (
+          <p className={`mb-3 text-xs font-extrabold uppercase tracking-[0.18em] ${isDark ? "text-[#FFC107]" : "text-[#1D4ED8]"}`}>
+            {eyebrow}
+          </p>
+        ) : null}
+        <h2 className={`font-display text-3xl font-extrabold leading-[1.1] tracking-[-0.035em] sm:text-4xl lg:text-[2.75rem] ${isDark ? "text-white" : "text-[#0D1B3D]"}`}>
+          {title}
+        </h2>
+      </div>
+      <p className={`mt-5 max-w-2xl text-base leading-8 lg:mt-0 ${isDark ? "text-white/70" : "text-[#52565E]"}`}>
         {description}
       </p>
     </div>
@@ -160,320 +186,242 @@ export function HomePage() {
         path="/"
         title="Workflow Automation for Law Firms"
       />
-      {/* Hero Section */}
-      <section className="relative w-full overflow-hidden bg-[#0D1B3D] py-20 sm:py-28 lg:py-32">
-        {/* Background Image with Dark Overlay */}
-        <div className="absolute inset-0 z-0">
+
+      <section className="relative isolate min-h-[calc(100vh-5rem)] overflow-hidden bg-[#0D1B3D] text-white">
+        <div className="absolute inset-0 -z-20">
           <img
             src="/images/hero-bg.png"
             alt="Modern office with laptop dashboard"
-            className="h-full w-full object-cover object-center opacity-35 select-none pointer-events-none"
+            className="h-full w-full object-cover object-center opacity-20"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0D1B3D] via-[#0D1B3D]/90 to-[#0D1B3D]/75" />
         </div>
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,#0D1B3D_0%,rgba(13,27,61,0.97)_44%,rgba(13,27,61,0.78)_100%)]" />
+        <div className="absolute inset-y-0 left-[52%] -z-10 hidden w-px bg-white/10 lg:block" />
 
-        <div className="relative z-10 mx-auto grid w-full max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:px-8">
-          <div className="flex flex-col justify-center text-white">
-            <p className="mb-4 text-xs sm:text-sm font-extrabold uppercase tracking-[0.15em] text-[#FFC107]">
+        <div className="mx-auto grid min-h-[calc(100vh-5rem)] w-full max-w-7xl items-center gap-14 px-4 py-20 sm:px-6 lg:grid-cols-[1.04fr_0.96fr] lg:px-8 lg:py-24">
+          <div>
+            <div className="mb-7 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.18em] text-[#FFC107]">
+              <span className="h-px w-9 bg-[#FFC107]" aria-hidden="true" />
               Law firm automation systems
-            </p>
-            <h1 className="font-display max-w-4xl text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
+            </div>
+            <h1 className="font-display max-w-3xl text-[2.7rem] font-extrabold leading-[1.02] tracking-[-0.045em] sm:text-6xl lg:text-[4rem]">
               Workflow automation for law firms
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/80 sm:text-xl">
+            <p className="mt-7 max-w-xl text-lg leading-8 text-white/72 sm:text-xl">
               We help law firms reduce repetitive tasks, filing, follow-up, and handoff
               work through practical workflow assessment and automation.
             </p>
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Button
                 href="/workflow-assessment"
                 icon={<Calendar aria-hidden="true" size={18} />}
+                size="lg"
                 variant="primary"
-                className="shadow-xl shadow-[#FFC107]/20 hover:scale-[1.02] transition-transform duration-150"
               >
                 Schedule a Workflow Assessment
               </Button>
-              <Button
-                href="#services"
-                icon={<ArrowRight aria-hidden="true" size={18} />}
-                variant="inverse"
-                className="hover:scale-[1.02] transition-transform duration-150"
-              >
+              <Button href="#services" size="lg" variant="inverse">
                 View Services
               </Button>
             </div>
-            <p className="mt-6 max-w-xl text-xs sm:text-sm leading-relaxed text-white/60">
+            <p className="mt-7 max-w-xl border-t border-white/12 pt-6 text-sm leading-7 text-white/60">
               Workflow-first, tool-agnostic, and designed to improve existing operations before recommending implementation.
             </p>
           </div>
 
-          <div className="flex items-center">
-            {/* Glassmorphism Card */}
-            <div className="w-full rounded-2xl border border-white/10 bg-white/5 p-6 sm:p-8 backdrop-blur-md shadow-2xl">
-              <p className="text-xs font-bold uppercase tracking-wider text-[#FFC107]">Assessment preview</p>
-              <h2 className="font-display mt-3 text-2xl font-bold text-white leading-snug">
-                From scattered steps to a clear workflow roadmap
-              </h2>
-              <ol className="mt-8 space-y-5">
-                {processSteps.map((step, index) => (
-                  <li className="flex items-start gap-4 group" key={step}>
-                    <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-white/10 text-sm font-bold text-white border border-white/10 group-hover:bg-[#FFC107] group-hover:text-[#0D1B3D] group-hover:border-[#FFC107] transition-all duration-200">
-                      {index + 1}
-                    </span>
-                    <div className="pt-1">
-                      <span className="text-base font-semibold text-white/90 group-hover:text-white transition-colors">{step}</span>
-                    </div>
-                  </li>
-                ))}
-              </ol>
+          <figure className="relative mx-auto w-full max-w-xl lg:ml-auto">
+            <div className="absolute -inset-5 -z-10 rounded-[2rem] border border-white/8" />
+            <div className="overflow-hidden rounded-2xl border border-white/15 bg-[#F7F8FA] text-[#0D1B3D] shadow-[0_32px_80px_rgba(2,8,23,0.4)]">
+              <div className="border-b border-[#D8DCE3] px-5 py-4 sm:px-6">
+                <div>
+                  <p className="text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#1D4ED8]">Assessment preview</p>
+                  <p className="font-display mt-2 text-lg font-bold leading-snug sm:text-xl">From scattered steps to a clear workflow roadmap</p>
+                </div>
+              </div>
+              <div className="relative p-5 sm:p-6 before:absolute before:bottom-9 before:left-[37px] before:top-9 before:w-px before:bg-[#1D4ED8]/20 sm:before:left-[41px]">
+                <ol className="space-y-3">
+                  {processSteps.map((step, index) => (
+                    <li className="relative flex items-center gap-4 rounded-xl border border-[#D8DCE3] bg-white p-3.5" key={step.title}>
+                      <span className="z-10 flex size-8 shrink-0 items-center justify-center rounded-full bg-[#1D4ED8] text-xs font-bold text-white">{index + 1}</span>
+                      <span className="text-sm font-bold">{step.title}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
             </div>
-          </div>
+          </figure>
         </div>
       </section>
 
-      {/* Solutions Section */}
-      <section id="solutions" className="bg-white py-20 sm:py-24">
+      <section id="solutions" className="bg-white py-20 sm:py-28">
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader
             description="We build intelligent automations that eliminate manual tasks, reduce delays, and keep your firm's operations running smoothly from intake to case resolution."
             eyebrow="Solutions"
             title="Every minute your team spends on repetitive work is time taken away from your clients."
           />
-          <div className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {problems.map(({ description, icon: Icon, title }) => (
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {problems.map(({ description, icon: Icon, title }, index) => (
               <article
-                className="group rounded-xl border border-[#D8DCE3] bg-white p-5 sm:p-8 hover:-translate-y-1 hover:shadow-lg hover:border-[#1D4ED8]/30 transition-all duration-200"
+                className={`group relative overflow-hidden border border-[#D8DCE3] bg-white p-6 transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-1 hover:border-[#1D4ED8]/35 hover:shadow-[0_18px_45px_rgba(13,27,61,0.09)] sm:p-7 ${index === 0 ? "rounded-2xl sm:col-span-2 lg:col-span-1 lg:row-span-2 lg:flex lg:flex-col lg:justify-end lg:bg-[#F2F4F7] lg:p-9" : "rounded-2xl"}`}
                 key={title}
               >
-                <span className="inline-flex items-center justify-center rounded-lg bg-[#F2F4F7] p-3 text-[#1D4ED8] group-hover:bg-[#1D4ED8] group-hover:text-white transition-colors duration-200">
-                  <Icon aria-hidden="true" size={24} />
+                <span className="inline-flex size-11 items-center justify-center rounded-xl bg-[#E9EEFB] text-[#1D4ED8] transition-colors group-hover:bg-[#1D4ED8] group-hover:text-white">
+                  <Icon aria-hidden="true" size={21} />
                 </span>
-                <h3 className="font-display mt-4 sm:mt-6 text-[17px] sm:text-xl font-bold text-[#0D1B3D]">{title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-[#52565E]">{description}</p>
+                {index === 0 ? <span className="absolute right-6 top-5 font-display text-5xl font-extrabold text-[#0D1B3D]/5 lg:text-7xl">01</span> : null}
+                <h3 className={`font-display mt-6 font-bold leading-snug text-[#0D1B3D] ${index === 0 ? "text-2xl" : "text-lg"}`}>{title}</h3>
+                <p className="mt-3 text-sm leading-7 text-[#62666D]">{description}</p>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Solution Section */}
-      <section className="relative overflow-hidden py-20 sm:py-24 border-y border-[#D8DCE3]/60">
-        {/* Background Image with Light Overlay */}
-        <div className="absolute inset-0 z-0">
-          <img
-            src="/images/solution-bg.png"
-            alt="Team collaborating in modern office"
-            className="h-full w-full object-cover object-center opacity-30 select-none pointer-events-none"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#F2F4F7]/95 via-[#F2F4F7]/80 to-[#F2F4F7]/65" />
-        </div>
-
-        <div className="relative z-10 mx-auto grid w-full max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
-          <div className="flex flex-col justify-center">
-            <p className="mb-3 text-xs font-extrabold uppercase tracking-[0.15em] text-[#1D4ED8]">
-              Solution
-            </p>
-            <h2 className="font-display text-3xl font-extrabold tracking-tight text-[#0D1B3D] sm:text-4xl">
+      <section className="relative overflow-hidden border-y border-[#D8DCE3] bg-[#F2F4F7] py-20 sm:py-28">
+        <div className="mx-auto grid w-full max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[0.92fr_1.08fr] lg:items-center lg:px-8">
+          <div className="relative min-h-[420px] overflow-hidden rounded-2xl bg-[#0D1B3D] shadow-[0_24px_60px_rgba(13,27,61,0.16)]">
+            <img src="/images/solution-bg.png" alt="Team collaborating in modern office" className="absolute inset-0 h-full w-full object-cover opacity-80" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B3D] via-[#0D1B3D]/25 to-transparent" />
+          </div>
+          <div className="lg:pl-8">
+            <p className="mb-3 text-xs font-extrabold uppercase tracking-[0.18em] text-[#1D4ED8]">Solution</p>
+            <h2 className="font-display text-3xl font-extrabold leading-[1.1] tracking-[-0.035em] text-[#0D1B3D] sm:text-4xl lg:text-[2.75rem]">
               Diagnose before automating
             </h2>
-            <p className="mt-5 text-base leading-relaxed text-[#52565E] sm:text-lg">
+            <p className="mt-5 max-w-xl text-base leading-8 text-[#52565E]">
               Sharpened starts by understanding the workflow. The assessment identifies
               what should be simplified, documented, automated, or left human.
             </p>
+            <ol className="mt-8 grid gap-3 sm:grid-cols-2">
+              {processSteps.map((step, index) => (
+                <li className="grid grid-cols-[auto_1fr] gap-3 border-t border-[#D8DCE3] py-3 text-[#0D1B3D]" key={step.title}>
+                  <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[#E9EEFB] text-xs font-bold text-[#1D4ED8]">{index + 1}</span>
+                  <div>
+                    <p className="text-sm font-bold">{step.title}</p>
+                    <p className="mt-1 text-xs leading-5 text-[#62666D]">Clarify the current state and move toward a practical next step.</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
             <div className="mt-8">
               <Button href="/workflow-assessment" icon={<ArrowRight aria-hidden="true" size={18} />}>
                 Schedule Assessment
               </Button>
             </div>
           </div>
-          <div className="rounded-2xl border border-[#D8DCE3] bg-white p-8 shadow-sm">
-            <ol className="space-y-6">
-              {processSteps.map((step, index) => (
-                <li className="flex gap-4 group" key={step}>
-                  <span className="flex size-10 shrink-0 items-center justify-center rounded-full border border-[#D8DCE3] text-sm font-bold text-[#0D1B3D] group-hover:border-[#1D4ED8] group-hover:bg-[#1D4ED8] group-hover:text-white transition-all duration-200">
-                    {index + 1}
-                  </span>
-                  <div>
-                    <h3 className="font-display font-bold text-[#0D1B3D] group-hover:text-[#1D4ED8] transition-colors pt-1.5">{step}</h3>
-                    <p className="mt-1 text-sm leading-relaxed text-[#62666D]">
-                      Clarify the current state and move toward a practical next step.
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </div>
         </div>
       </section>
 
-      {/* Services Section */}
-      <section id="services" className="relative overflow-hidden bg-[#0D1B3D] py-20 sm:py-24" aria-label="Workflow areas Sharpened can improve">
-        {/* Background Image with Dark Overlay */}
-        <div className="absolute inset-0 z-0">
-          <img
-            src="/images/services-bg.png"
-            alt="Analytics dashboard on screen"
-            className="h-full w-full object-cover object-center opacity-25 select-none pointer-events-none"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0D1B3D]/95 via-[#0D1B3D]/90 to-[#0D1B3D]/95" />
-        </div>
-
-        <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section id="services" className="relative overflow-hidden bg-[#0D1B3D] py-20 text-white sm:py-28" aria-label="Workflow areas Sharpened can improve">
+        <div className="absolute inset-0 opacity-[0.07] [background-image:linear-gradient(rgba(255,255,255,.6)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.6)_1px,transparent_1px)] [background-size:48px_48px]" />
+        <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader
             description="Each service area is tied to an operational outcome, with the Workflow Assessment as the recommended starting point."
             eyebrow="Services"
             title="Workflow areas Sharpened can improve"
             theme="dark"
           />
-          <div className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {services.map(({ description, icon: Icon, title }) => (
-              <article
-                className="group rounded-xl border border-white/10 bg-white/5 p-5 sm:p-8 backdrop-blur-sm hover:-translate-y-1 hover:shadow-2xl hover:bg-white/10 hover:border-white/20 transition-all duration-200"
-                key={title}
-              >
-                <span className="inline-flex items-center justify-center rounded-lg bg-white/10 p-3 text-[#FFC107] group-hover:bg-[#FFC107] group-hover:text-[#0D1B3D] transition-colors duration-200">
-                  <Icon aria-hidden="true" size={24} />
-                </span>
-                <h3 className="font-display mt-4 sm:mt-6 text-[17px] sm:text-xl font-bold text-white">{title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-white/70 group-hover:text-white/80 transition-colors">{description}</p>
+          <div className="grid overflow-hidden rounded-2xl border border-white/12 bg-white/5 sm:grid-cols-2 lg:grid-cols-3">
+            {services.map(({ description, icon: Icon, title }, index) => (
+              <article className="group relative min-h-64 border-b border-white/12 p-6 transition-colors hover:bg-white/[0.08] sm:p-8 sm:[&:nth-child(odd)]:border-r lg:[&:nth-child(odd)]:border-r-0 lg:[&:not(:nth-child(3n))]:border-r lg:[&:nth-last-child(-n+3)]:border-b-0" key={title}>
+                <div className="flex items-start justify-between">
+                  <span className="inline-flex size-11 items-center justify-center rounded-xl bg-white/10 text-[#FFC107] transition-colors group-hover:bg-[#FFC107] group-hover:text-[#0D1B3D]">
+                    <Icon aria-hidden="true" size={21} />
+                  </span>
+                  <span className="text-xs font-bold tabular-nums text-white/30">0{index + 1}</span>
+                </div>
+                <h3 className="font-display mt-8 text-xl font-bold leading-snug">{title}</h3>
+                <p className="mt-3 text-sm leading-7 text-white/65">{description}</p>
               </article>
             ))}
           </div>
-          <div className="mt-12 flex justify-center">
-            <Button href="/services" icon={<ArrowRight aria-hidden="true" size={18} />} variant="inverse">
-              Explore Services
-            </Button>
+          <div className="mt-10 flex justify-start sm:justify-end">
+            <Button href="/services" icon={<ArrowRight aria-hidden="true" size={18} />} variant="inverse">Explore Services</Button>
           </div>
         </div>
       </section>
 
-      {/* Systems Section */}
-      <section id="systems" className="py-20 sm:py-24">
+      <section id="systems" className="bg-white py-20 sm:py-28">
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader
             description="Whether it's intake, document collection, case management, or client communication, we create automations that save time and keep your practice running smoothly."
             eyebrow="Systems"
             title="Better systems create better client experiences."
           />
-          <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-5">
+          <ol className="relative grid gap-4 lg:grid-cols-5 lg:gap-0">
+            <div className="absolute left-[10%] right-[10%] top-6 hidden h-px bg-[#D8DCE3] lg:block" aria-hidden="true" />
             {processSteps.map((step, index) => (
-              <article
-                className="relative rounded-xl border border-[#D8DCE3] bg-white p-5 sm:p-6 hover:shadow-md hover:border-[#1D4ED8]/30 transition-all duration-200 group overflow-hidden"
-                key={step}
-              >
-                <div className="absolute top-0 left-0 right-0 h-1 bg-transparent group-hover:bg-[#1D4ED8] transition-colors duration-200" />
-                <span className="font-display text-sm font-extrabold uppercase tracking-wider text-[#1D4ED8]">
-                  Step {index + 1}
+              <li className="group relative grid grid-cols-[auto_1fr] gap-4 rounded-xl border border-[#D8DCE3] bg-[#F7F8FA] p-5 lg:block lg:rounded-none lg:border-0 lg:bg-transparent lg:px-5 lg:py-0" key={step.title}>
+                <span className="relative z-10 flex size-12 shrink-0 items-center justify-center rounded-full border-4 border-white bg-[#0D1B3D] font-display text-sm font-extrabold text-[#FFC107] shadow-sm transition-transform group-hover:-translate-y-1">
+                  {index + 1}
                 </span>
-                <h3 className="font-display mt-3 text-[16px] sm:text-lg font-bold text-[#0D1B3D]">
-                  {step}
-                </h3>
-                <p className="mt-2 text-xs leading-relaxed text-[#62666D]">
-                  {index === 0 && "Initial alignment call to understand operations."}
-                  {index === 1 && "Deep dive analysis into actual task sequences."}
-                  {index === 2 && "Identifying key speed bumps and delay zones."}
-                  {index === 3 && "Actionable recommendations for tech or process changes."}
-                  {index === 4 && "Collaborative configuration and handoff systems."}
-                </p>
-              </article>
+                <div className="lg:mt-6">
+                  <h3 className="font-display text-base font-bold text-[#0D1B3D]">{step.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-[#62666D]">{step.description}</p>
+                </div>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       </section>
 
-      {/* Trust Section */}
-      <section className="bg-[#0D1B3D] py-20 text-white sm:py-24 relative overflow-hidden">
-        {/* Decorative elements */}
-        <div className="absolute -left-16 -top-16 h-48 w-48 rounded-full bg-[#1D4ED8]/20 blur-2xl" />
-        <div className="absolute -right-16 -bottom-16 h-48 w-48 rounded-full bg-[#FFC107]/10 blur-2xl" />
-
-        <div className="relative z-10 mx-auto grid w-full max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
+      <section className="border-y border-[#D8DCE3] bg-[#F2F4F7] py-20 sm:py-28">
+        <div className="mx-auto grid w-full max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[0.82fr_1.18fr] lg:gap-20 lg:px-8">
           <div>
-            <h2 className="font-display text-3xl font-extrabold tracking-tight sm:text-4xl">
+            <h2 className="font-display text-3xl font-extrabold leading-[1.1] tracking-[-0.035em] text-[#0D1B3D] sm:text-4xl">
               Automation should feel like an upgrade—not a disruption.
             </h2>
-            <p className="mt-5 text-base leading-relaxed text-white/80 sm:text-lg">
+            <p className="mt-5 text-base leading-8 text-[#52565E]">
               Every engagement starts with understanding how your firm works today. We
               recommend practical improvements that fit your existing workflows—not
               unnecessary software or complicated system changes.
             </p>
             <div className="mt-8">
-              <Button href="/contact" icon={<ArrowRight aria-hidden="true" size={18} />} variant="inverse">
-                Discuss Your Workflow
-              </Button>
+              <Button href="/contact" icon={<ArrowRight aria-hidden="true" size={18} />} variant="secondary">Discuss Your Workflow</Button>
             </div>
           </div>
-          <ul className="space-y-4 flex flex-col justify-center">
-            {trustItems.map((item) => (
-              <li className="flex gap-4 items-start p-4 rounded-xl bg-white/5 border border-white/5 hover:border-white/10 hover:bg-white/10 transition-all duration-150" key={item}>
-                <Shield aria-hidden="true" className="mt-0.5 shrink-0 text-[#FFC107]" size={22} />
-                <span className="leading-relaxed text-white/90 text-[15px]">{item}</span>
+          <ul className="overflow-hidden rounded-2xl border border-[#D8DCE3] bg-white shadow-[0_18px_50px_rgba(13,27,61,0.07)]">
+            {trustItems.map((item, index) => (
+              <li className="grid grid-cols-[auto_1fr_auto] items-center gap-4 border-b border-[#E4E7EC] px-5 py-5 last:border-b-0 sm:px-7" key={item}>
+                <Shield aria-hidden="true" className="text-[#1D4ED8]" size={20} />
+                <span className="text-sm font-semibold leading-6 text-[#333841] sm:text-base">{item}</span>
+                <span className="font-display text-xs font-bold text-[#B3BAC6]">0{index + 1}</span>
               </li>
             ))}
           </ul>
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section id="faqs" className="bg-white py-20 sm:py-24">
-        <div className="mx-auto w-full max-w-4xl px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            description="A few practical answers before scheduling a workflow conversation."
-            title="Common questions before scheduling"
-          />
-          <div className="space-y-4">
+      <section id="faqs" className="bg-white py-20 sm:py-28">
+        <div className="mx-auto grid w-full max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20 lg:px-8">
+          <div>
+            <h2 className="font-display text-3xl font-extrabold leading-[1.1] tracking-[-0.035em] text-[#0D1B3D] sm:text-4xl">Common questions before scheduling</h2>
+            <p className="mt-5 text-base leading-8 text-[#52565E]">A few practical answers before scheduling a workflow conversation.</p>
+          </div>
+          <div className="border-t border-[#0D1B3D]">
             {faqs.map(({ answer, question }) => (
-              <details
-                className="group border border-[#D8DCE3] rounded-xl bg-white p-5 transition-all duration-200 open:shadow-md [&_summary::-webkit-details-marker]:hidden"
-                key={question}
-              >
-                <summary className="flex items-center justify-between cursor-pointer list-none font-display font-bold text-[#0D1B3D] focus:outline-none hover:text-[#1D4ED8]">
-                  <span className="pr-4">{question}</span>
-                  <span className="flex size-6 items-center justify-center rounded-full bg-[#F2F4F7] text-[#0D1B3D] transition-transform duration-200 group-open:rotate-180 group-open:bg-[#1D4ED8] group-open:text-white">
-                    <svg
-                      className="size-3.5 fill-none stroke-current stroke-2"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </span>
+              <details className="group border-b border-[#D8DCE3] py-1 [&_summary::-webkit-details-marker]:hidden" key={question}>
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 font-display text-base font-bold text-[#0D1B3D] outline-none transition-colors hover:text-[#1D4ED8] focus-visible:ring-2 focus-visible:ring-[#1D4ED8] focus-visible:ring-offset-4 sm:text-lg">
+                  <span>{question}</span>
+                  <span className="flex size-8 shrink-0 items-center justify-center rounded-full border border-[#D8DCE3] text-xl font-normal transition-all group-open:rotate-45 group-open:border-[#1D4ED8] group-open:bg-[#1D4ED8] group-open:text-white" aria-hidden="true">+</span>
                 </summary>
-                <div className="mt-4 pt-4 border-t border-[#D8DCE3]/60 text-sm leading-relaxed text-[#52565E] animate-in fade-in duration-200">
-                  {answer}
-                </div>
+                <p className="max-w-2xl pb-6 pr-10 text-sm leading-7 text-[#52565E] sm:text-base">{answer}</p>
               </details>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Bottom CTA / Contact Section */}
-      <section id="contact" className="py-20 sm:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="relative overflow-hidden rounded-3xl bg-[#0D1B3D] px-8 py-12 shadow-2xl sm:px-12 sm:py-16 lg:grid lg:grid-cols-2 lg:gap-x-12 lg:px-16 lg:py-20">
-            {/* Background elements */}
-            <div className="absolute -right-20 -top-20 h-60 w-60 rounded-full bg-[#1D4ED8]/20 blur-3xl" />
-            <div className="absolute -left-20 -bottom-20 h-60 w-60 rounded-full bg-[#FFC107]/10 blur-3xl" />
-
-            <div className="relative z-10 flex flex-col justify-center">
-              <h2 className="font-display text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-                Ready to find the workflow worth fixing first?
-              </h2>
-              <p className="mt-4 text-base leading-relaxed text-white/80">
-                Start with a focused, confidential workflow conversation and walk away with a clear assessment roadmap for your practice.
-              </p>
-            </div>
-            <div className="relative z-10 mt-10 flex items-center lg:mt-0 lg:justify-end">
-              <Button
-                href="/workflow-assessment"
-                icon={<Calendar aria-hidden="true" size={18} />}
-                variant="primary"
-                size="lg"
-                className="shadow-xl shadow-[#FFC107]/20 hover:scale-[1.02] transition-transform duration-150"
-              >
-                Schedule Assessment
-              </Button>
-            </div>
+      <section id="contact" className="bg-white px-4 pb-20 sm:px-6 sm:pb-28 lg:px-8">
+        <div className="relative mx-auto max-w-7xl overflow-hidden rounded-2xl bg-[#0D1B3D] px-6 py-12 text-white sm:px-10 sm:py-16 lg:grid lg:grid-cols-[1fr_auto] lg:items-end lg:gap-16 lg:px-16">
+          <div className="absolute bottom-0 right-0 h-1 w-1/3 bg-[#FFC107]" />
+          <div className="relative max-w-3xl">
+            <h2 className="font-display text-3xl font-extrabold leading-[1.08] tracking-[-0.035em] sm:text-4xl lg:text-5xl">Ready to find the workflow worth fixing first?</h2>
+            <p className="mt-5 max-w-2xl text-base leading-8 text-white/70">Start with a focused, confidential workflow conversation and walk away with a clear assessment roadmap for your practice.</p>
+          </div>
+          <div className="relative mt-8 lg:mt-0">
+            <Button href="/workflow-assessment" icon={<Calendar aria-hidden="true" size={18} />} size="lg" variant="primary">Schedule Assessment</Button>
           </div>
         </div>
       </section>
