@@ -146,7 +146,7 @@ export function Layout({ children }: LayoutProps) {
               <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-[#FFC107]">Contact Info</h3>
               <p className="mt-4 text-[14px] leading-6 text-white/60">
                 Sharpened Automation<br />
-                Email: <a href="mailto:hello@sharpened.ph" className="hover:text-white underline">hello@sharpened.ph</a><br />
+                Email: <a href="mailto:sharpauto7@gmail.com" className="hover:text-white underline">sharpauto7@gmail.com</a><br />
                 Domain: <a href="https://sharp-enedautomation.site" target="_blank" rel="noreferrer" className="hover:text-white underline">sharp-enedautomation.site</a>
               </p>
             </div>
