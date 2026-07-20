@@ -14,6 +14,26 @@ export function BlogArticlePage() {
   if (!post) return <NotFoundPage />;
 
   const relatedPosts = blogPosts.filter((candidate) => candidate.slug !== post.slug).slice(0, 3);
+  const canonicalUrl = `https://sharp-enedautomation.site/blog/${post.slug}`;
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.excerpt,
+    mainEntityOfPage: canonicalUrl,
+    author: {
+      "@type": "Person",
+      name: post.author.name,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Sharpened Automated",
+      url: "https://sharp-enedautomation.site",
+    },
+    ...(post.author.image
+      ? { image: `https://sharp-enedautomation.site${post.author.image}` }
+      : {}),
+  };
 
   return (
     <>
@@ -22,6 +42,7 @@ export function BlogArticlePage() {
         description={post.excerpt}
         image={post.author.image}
         path={`/blog/${post.slug}`}
+        structuredData={structuredData}
         title={post.title}
         type="article"
       />
@@ -132,4 +153,3 @@ export function BlogArticlePage() {
     </>
   );
 }
-

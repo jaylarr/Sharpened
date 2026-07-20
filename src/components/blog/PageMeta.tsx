@@ -7,6 +7,7 @@ type PageMetaProps = {
   type?: "website" | "article";
   image?: string;
   author?: string;
+  structuredData?: Record<string, unknown>;
 };
 
 const siteUrl = "https://sharp-enedautomation.site";
@@ -28,6 +29,7 @@ export function PageMeta({
   description,
   image,
   path,
+  structuredData,
   title,
   type = "website",
 }: PageMetaProps) {
@@ -57,7 +59,20 @@ export function PageMeta({
       document.head.appendChild(canonical);
     }
     canonical.href = canonicalUrl;
-  }, [author, description, image, path, title, type]);
+
+    const existingStructuredData = document.head.querySelector<HTMLScriptElement>(
+      'script[data-sharpened-structured-data="true"]'
+    );
+    existingStructuredData?.remove();
+
+    if (structuredData) {
+      const script = document.createElement("script");
+      script.dataset.sharpenedStructuredData = "true";
+      script.type = "application/ld+json";
+      script.textContent = JSON.stringify(structuredData);
+      document.head.appendChild(script);
+    }
+  }, [author, description, image, path, structuredData, title, type]);
 
   return null;
 }
