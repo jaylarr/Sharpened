@@ -13,7 +13,7 @@ function AuthorAvatar({ author, compact = false }: Pick<AuthorIdentityProps, "au
     return (
       <img
         alt={author.imageAlt ?? `Portrait of ${author.name}`}
-        className={`${sizeClasses} shrink-0 rounded-full border-2 border-white object-cover shadow-sm`}
+        className={`${sizeClasses} shrink-0 rounded-xl border-2 border-white object-cover shadow-sm`}
         height={compact ? 40 : 80}
         src={author.image}
         width={compact ? 40 : 80}
@@ -31,7 +31,7 @@ function AuthorAvatar({ author, compact = false }: Pick<AuthorIdentityProps, "au
   return (
     <span
       aria-hidden="true"
-      className={`${sizeClasses} flex shrink-0 items-center justify-center rounded-full bg-[#1D4ED8] font-display text-sm font-extrabold text-white shadow-sm`}
+      className={`${sizeClasses} flex shrink-0 items-center justify-center rounded-xl bg-[#1D4ED8] font-display text-sm font-extrabold text-white shadow-sm`}
     >
       {initials}
     </span>
@@ -56,8 +56,9 @@ export function AuthorCard({ author }: Pick<AuthorIdentityProps, "author">) {
   return (
     <aside
       aria-label={`About ${author.name}`}
-      className="mt-14 rounded-2xl border border-[#D8DCE3] bg-[#F7F8FA] p-6 sm:p-8"
+      className="relative mt-14 overflow-hidden rounded-2xl border border-[#D8DCE3] bg-[#F7F8FA] p-6 pl-8 sm:p-8 sm:pl-10"
     >
+      <span className="absolute inset-y-0 left-0 w-1.5 bg-[#FFC107]" aria-hidden="true" />
       <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
         <AuthorAvatar author={author} />
         <div>
@@ -73,4 +74,3 @@ export function AuthorCard({ author }: Pick<AuthorIdentityProps, "author">) {
     </aside>
   );
 }
-
