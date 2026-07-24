@@ -45,6 +45,10 @@ export function PageMeta({
     setMeta('meta[property="og:type"]', "property", "og:type", type);
     setMeta('meta[property="og:url"]', "property", "og:url", canonicalUrl);
     setMeta('meta[property="og:image"]', "property", "og:image", imageUrl);
+    setMeta('meta[name="twitter:card"]', "name", "twitter:card", "summary_large_image");
+    setMeta('meta[name="twitter:title"]', "name", "twitter:title", fullTitle);
+    setMeta('meta[name="twitter:description"]', "name", "twitter:description", description);
+    setMeta('meta[name="twitter:image"]', "name", "twitter:image", imageUrl);
 
     if (author) {
       setMeta('meta[name="author"]', "name", "author", author);
